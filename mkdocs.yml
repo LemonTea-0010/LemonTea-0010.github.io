@@ -2,5 +2,25 @@
 site_name: My Blog  # 你的博客名称（原有配置保留）
 site_url: https://LemonTea-0010.github.io/  # 新增：你的 GitHub Pages 地址
 base_url: /  # 新增：根路径，无仓库名后缀时填 /
-theme:
-  name: material  # 原有配置保留
+theme: # 主题配置
+  name: material # 使用 material 主题
+  palette: # 调色板，可以切换主题色
+    - scheme: default # 默认配色方案
+      primary: indigo # 主色调：靛蓝色
+      accent: pink # 强调色：粉色
+      toggle:
+        icon: material/weather-sunny # 白天模式图标
+        name: 切换到深色模式
+    - scheme: slate # 深色配色方案
+      primary: deep orange # 深色模式下的主色调
+      accent: lime # 深色模式下的强调色
+      toggle:
+        icon: material/weather-night # 夜晚模式图标
+        name: 切换到浅色模式
+
+  features: # 开启主题的增强功能
+    - navigation.tabs # 导航栏以标签页形式展示
+    - navigation.sections # 在侧边栏显示章节分组
+    - navigation.expand # 侧边栏可折叠展开
+    - search.highlight # 搜索关键词高亮
+    - content.code.copy # 给代码块添加“复制”按钮

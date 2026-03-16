@@ -35,3 +35,5 @@ jobs:
           publish_dir: ./site  # 指向 mkdocs build 生成的静态文件目录
           publish_branch: gh-pages  # 部署到 gh-pages 分支
           force_orphan: true  # 强制更新分支
+          # mkdocs.yml 里新增这两行（替换成你的实际地址）
+          
