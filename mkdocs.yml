@@ -1,7 +1,7 @@
-# mkdocs.yml 核心配置示例（其他配置保留，只加这两行）
-site_name: My Blog  # 你的博客名称（原有配置保留）
-site_url: https://LemonTea-0010.github.io/  # 新增：你的 GitHub Pages 地址
-base_url: /  # 新增：根路径，无仓库名后缀时填 /
+site_name: My Blog
+site_url: https://LemonTea-0010.github.io/  # 保留这个配置即可
+# 删掉 base_url: / 这一行
+
 theme: # 主题配置
   name: material # 使用 material 主题
   palette: # 调色板，可以切换主题色
@@ -24,3 +24,8 @@ theme: # 主题配置
     - navigation.expand # 侧边栏可折叠展开
     - search.highlight # 搜索关键词高亮
     - content.code.copy # 给代码块添加“复制”按钮
+
+# 可选：添加导航配置，方便管理页面
+nav:
+  - 首页: index.md
+  - 关于我: about.md
