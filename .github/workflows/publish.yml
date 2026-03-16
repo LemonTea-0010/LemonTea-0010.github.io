@@ -1,23 +1,37 @@
-name: Publish My Site # 工作流的名字
+name: Publish My Site
 
-on: # 触发条件
-  push: # 当有代码推送到仓库时
-    branches: [ main ] # 并且是推送到 main 分支
+on:
+  push:
+    branches: [ main ]
 
-jobs: # 要执行的任务
-  deploy: # 任务名：部署
-    runs-on: ubuntu-latest # 在一个最新的 Ubuntu 系统环境中运行
-    steps: # 任务步骤
-      - name: Checkout Code # 步骤1：拉取代码
-        uses: actions/checkout@v3
-
-      - name: Setup Python # 步骤2：安装 Python
-        uses: actions/setup-python@v4
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write  # 关键：显式授予写权限
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
         with:
-          python-version: '3.x'
+          fetch-depth: 0  # 拉取完整提交历史
 
-      - name: Install Dependencies # 步骤3：安装 MkDocs 和主题
-        run: pip install mkdocs-material
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
 
-      - name: Build and Deploy # 步骤4：构建网站并部署到 GitHub Pages
-        run: mkdocs gh-deploy --force
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install mkdocs-material
+
+      - name: Build MkDocs Site
+        run: mkdocs build  # 先构建静态文件到 site 目录
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4  # 用成熟的部署 Action 替代 mkdocs gh-deploy
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}  # 自动生成的令牌，带写权限
+          publish_dir: ./site  # 指向 mkdocs build 生成的静态文件目录
+          publish_branch: gh-pages  # 部署到 gh-pages 分支
+          force_orphan: true  # 强制更新分支
